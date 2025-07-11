@@ -1,19 +1,9 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
+venv/
 __pycache__/
-*.py[cod]
-*.so
-
-# Editor IDE
-.vscode/
-*.swp
-
-# Flask 
-instance/
+*.pyc
+*.pyo
+*.pyd
 *.db
 *.sqlite3
-
-# Sistema
-
+.env
 .DS_Store
-Thumbs.db
-
