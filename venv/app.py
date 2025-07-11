@@ -25,22 +25,8 @@ def coletar_dados():
 
 @app.route('/dados', methods=['GET'])
 def listar_dados():
-    dado = DadosColetados.query.all()
-    if not dado:
-        return jsonify({'message': 'Nenhum dado encontrado'}), 404
-    else:
-        return jsonify([d.to_dict() for d in dado]), 200
-    
-    '''dados = request.get_json(force=False, silent=True,cache=True)
-    if dados is None:
-        return jsonify({"erro": "Corpo da requisação não é um JSON válido"}), 415
-    if 'user' in dados:
-        dado.user = dados['user']
-    if 'senha' in dados:
-        dado.senha = dados['senha']
-
-    db.session.commit()
-    return jsonify([dado.to_dict() for dado in DadosColetados.query.all()]), 200'''
+    dados = DadosColetados.query.all()
+    return jsonify([d.to_dict() for d in dados]), 200
 
 @app.route('/apagar/<int:id>', methods=['DELETE'])
 def apagar_dado(id):

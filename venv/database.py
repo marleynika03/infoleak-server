@@ -5,9 +5,11 @@ from datetime import datetime, timezone
 db = SQLAlchemy()
 
 def init_db(app: Flask):
-    if 'SQLALCHEMY_DATABASE_URI' not in app.config:
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///infoleak.db'
+    # Só define URI padrão se ela ainda não foi definida (útil para testes)
     
+    if 'SQLALCHEMY_DATABASE_URI' not in app.config:
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:/usuario:senha@localhost:5432/nome_do_banco'
+
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 

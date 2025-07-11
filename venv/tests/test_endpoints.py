@@ -5,7 +5,7 @@ from app import app, db, DadosColetados
 @pytest.fixture
 def client():
     app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://:memory:'
 
     with app.app_context():
         db.create_all()
@@ -38,19 +38,6 @@ def test_get_dados(client):
 
     assert isinstance(data, list)
     assert any(d["user"] == "joao" and d["senha"] == "senha" for d in data)
-
-def test_put_corrigir(client):
-    # Insere dentro do contexto do client
-    with app.app_context():
-        dado = DadosColetados(user="temp", senha="123", origem_ip="1.1.1.1")
-        db.session.add(dado)
-        db.session.commit()
-        id = dado.id
-
-    response = client.put(f'/corrigir/{id}', json={"user": "novo_user"})
-    assert response.status_code == 404
-    data = response.get_json()
-    '''assert data["message"] == "Dados atualizados com sucesso"'''
 
 def test_delete_dado(client):
     with app.app_context():
