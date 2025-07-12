@@ -1,5 +1,7 @@
-venv/
+Scripts/
+Lib/site-packages/
 __pycache__/
+Lib/
 *.pyc
 *.pyo
 *.pyd
